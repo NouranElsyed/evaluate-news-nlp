@@ -1,26 +1,52 @@
-# Project Name
+# Evaluate News NLP
 
-A brief description of your project goes here. This is an example of a project setup using Webpack, Express, and Webpack Dev Server for a development environment.
+This project focuses on evaluating news articles using Natural Language Processing (NLP) techniques. The goal is to analyze, categorize, and provide insights based on news content. 
 
 ## Features
 
-- Webpack setup for bundling JavaScript files
-- Express server running on development mode
-- Webpack Dev Server for real-time changes with Hot Module Replacement (HMR)
-- Easy to configure and customize
-
-## Requirements
-
-Before you begin, ensure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (version 14 or above)
-- [npm](https://www.npmjs.com/) (Node Package Manager)
+- News article classification using machine learning models.
+- Sentiment analysis of news articles.
+- Named entity recognition (NER) to identify key entities.
+- Text preprocessing and feature extraction techniques.
 
 ## Installation
 
-Follow these steps to get your development environment set up:
+Follow these steps to run the application locally:
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/project-name.git
+
+   git clone https://github.com/NouranElsyed/evaluate-news-nlp.git
+
+Navigate to the project folder:
+
+    cd starter_project
+
+Install the dependencies:
+
+npm install
+
+
+##  How to Run
+To evaluate news articles, simply run:
+
+  npm run build-prod
+  npm start
+
+
+
+## Dependencies
+
+ 
+    clean-webpack-plugin
+    cors
+    css-loader
+    dotenv
+    express
+    node-fetch
+    style-loader
+    webpack-cli
+
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for detailS
