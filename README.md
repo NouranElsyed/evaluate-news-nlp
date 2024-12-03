@@ -11,6 +11,10 @@ This project focuses on evaluating news articles using Natural Language Processi
 
 ## Installation
 
+Notes:
+
+    Node -v : v22.11.0
+
 Follow these steps to run the application locally:
 
 1. Clone the repository:
