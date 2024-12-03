@@ -1,4 +1,4 @@
-// Mock the global fetch function
+
 global.fetch = jest.fn(() =>
     Promise.resolve({
         json: () => Promise.resolve({
@@ -16,7 +16,7 @@ import { handleSubmit } from './formHandler';
 describe('Form Handler Tests', () => {
     let form, input, resultDiv;
 
-    // إعداد العناصر قبل كل اختبار
+
     beforeEach(() => {
         document.body.innerHTML = `
             <form id="urlForm">
@@ -32,16 +32,15 @@ describe('Form Handler Tests', () => {
         form.addEventListener('submit', handleSubmit);
     });
 
-    // الاختبار المطلوب إضافته
+
     it('should display result after sending valid data', async () => {
-        input.value = 'https://example.com'; // محاكاة إدخال المستخدم
+        input.value = 'https://example.com'; 
         const submitEvent = new Event('submit');
-        form.dispatchEvent(submitEvent); // إرسال الحدث
+        form.dispatchEvent(submitEvent); 
     
-        // الانتظار لضمان اكتمال المعالجة غير المتزامنة
         await new Promise((resolve) => setTimeout(resolve, 0)); 
     
-        // التحقق من النصوص داخل العنصر
+        
         expect(resultDiv.innerHTML).toContain('Agreement: AGREEMENT');
         expect(resultDiv.innerHTML).toContain('Confidence: 0.95');
         expect(resultDiv.innerHTML).toContain('Polarity: P');
