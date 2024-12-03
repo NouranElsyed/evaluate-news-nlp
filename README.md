@@ -30,8 +30,8 @@ npm install
 ##  How to Run
 To evaluate news articles, simply run:
 
-  npm run build-prod
-  npm start
+    npm run build-prod
+    npm start
 
 
 
