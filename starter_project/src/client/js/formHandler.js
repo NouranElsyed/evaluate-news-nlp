@@ -1,30 +1,73 @@
-// Replace checkForName with a function that checks the URL
-import { checkForName } from './nameChecker'
+const serverURL = 'http://localhost:8000/sentiment';
 
-// If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
-// const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
-const serverURL = 'https://localhost:8000/api'
-
-const form = document.getElementById('urlForm');
+let form = document.getElementById('urlForm');
+console.log(form);
+if(form){
 form.addEventListener('submit', handleSubmit);
-
+}else{
+   form= ` <form id="urlForm">
+    <input id="name" type="text" name="url" placeholder="Enter URL" required>
+    <button id="submitButton" type="submit">Submit</button>
+</form>`;
+}
 function handleSubmit(event) {
+    console.log(event);
     event.preventDefault();
 
-    // Get the URL from the input field
-    const formText = document.getElementById('name').value;
-
-    // This is an example code that checks the submitted name. You may remove it from your code
-    checkForName(formText);
     
-    // Check if the URL is valid
- 
-        // If the URL is valid, send it to the server using the serverURL constant above
-      
+    const formText = document.getElementById('name').value;
+    console.log(formText);
+
+    if (isValidURL(formText)) {
+        sendDataToServer(formText);
+    } else {
+        alert('Please enter a valid URL');
+    }
 }
 
-// Function to send data to the server
 
-// Export the handleSubmit function
+function isValidURL(url) {
+    try {
+        new URL(url);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+async function sendDataToServer(url) {
+    console.log(url);
+    
+    try {
+        const response = await fetch(serverURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: url }),
+        });
+
+        const data = await response.json();
+        console.log(data);
+        
+        displayResult(data); 
+    } catch (error) {
+        console.error('Error sending data to server:', error);
+    }
+}
+
+function displayResult(data) {
+        console.log('Displaying result:', data); 
+        const resultDiv = document.getElementById('sentimentResult');
+        resultDiv.innerHTML = `
+            <strong>Form Results:</strong>
+            <p>Agreement: ${data.agreement || 'N/A'}</p>
+            <p>Confidence: ${data.confidence || 'N/A'}</p>
+            <p>Polarity: ${data.score_tag || 'N/A'}</p>
+            <p>Subjectivity: ${data.subjectivity || 'N/A'}</p>
+            <p>Text Snippet: ${data.sentence_list?.[0]?.text || 'N/A'}</p>
+        `;
+    }
+
+
 export { handleSubmit };
-

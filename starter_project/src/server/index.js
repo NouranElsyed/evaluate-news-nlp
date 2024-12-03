@@ -1,33 +1,56 @@
-var path = require('path');
-const express = require('express');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
+import fetch from 'node-fetch';
+import path from 'path';
+import express from 'express';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import { fileURLToPath } from 'url';
+
+
+const __filename = path.resolve();
+const __dirname = path.dirname(__filename);
+
 dotenv.config();
 
 const app = express();
 
-const cors = require('cors');
+console.log(__dirname, __filename);
+
+const API_URL = 'https://api.meaningcloud.com/sentiment-2.1';
+const API_KEY = process.env.API_KEY;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../../dist')));
 
-console.log(__dirname);
-
-// Variables for url and api key
-
-
-app.get('/', function (req, res) {
-    res.send("This is the server API page, you may access its services via the client app.");
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..','..', 'dist', 'index.html'));
 });
 
 
-// POST Route
 
 
+app.post('/sentiment', async (req, res) => {
+    const { url } = req.body;
+  
 
-// Designates what port the app will listen to for incoming requests
+    if (!url) {
+      return res.status(400).json({ error: 'URL is required' });
+    }
+  
+    try {
+      const response = await fetch(`${API_URL}?key=${API_KEY}&url=${url}&lang=en`);
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Failed to fetch sentiment analysis.' });
+    }
+  });
+
+
 app.listen(8000, function () {
-    console.log('Example app listening on port 8000!');
+    console.log('Server running on http://localhost:8000');
 });
 
-
+export default app;

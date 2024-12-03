@@ -1,33 +1,44 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebPackPlugin = require("html-webpack-plugin")
-const WorkboxPlugin = require('workbox-webpack-plugin');
+import path from 'path';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'; 
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import WorkboxPlugin from 'workbox-webpack-plugin';
 
-module.exports = {
-    entry: './src/client/index.js',
+const __dirname = path.resolve(); 
+
+export default {
+    entry: './src/client/index.js', 
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "bundle.js",
+        publicPath: "/",
+    },
     mode: 'production',
     module: {
         rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "babel-loader"
+                loader: "babel-loader",  
             },
             {
                 test: /\.scss$/,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
-        }
-        ]
+                use: ['style-loader', 'css-loader', 'sass-loader'], 
+            },
+        ],
     },
     plugins: [
-        new HtmlWebPackPlugin({
-            template: "./src/client/views/index.html",
-            filename: "./index.html",
+        new HtmlWebpackPlugin({
+            template: './src/client/views/index.html', 
+            filename: 'index.html',
         }),
-        new WorkboxPlugin.GenerateSW()
+        new CleanWebpackPlugin(),  
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true,
+        }),  
     ],
     devServer: {
         port: 3000,
-        allowedHosts: 'all'
-    }
-}
+        allowedHosts: 'all',
+    },
+};
