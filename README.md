@@ -18,13 +18,20 @@ Follow these steps to run the application locally:
 
    git clone https://github.com/NouranElsyed/evaluate-news-nlp.git
 
+![App Screenshot](img/1.jpg)
+
 Navigate to the project folder:
 
-    cd starter_project
+    cd evaluate-news-nlp/starter_project
+
+![App Screenshot](img/2.jpg)
+
 
 Install the dependencies:
 
-npm install
+        npm install
+
+![App Screenshot](img/3.jpg)
 
 
 ##  How to Run
@@ -34,6 +41,11 @@ To evaluate news articles, simply run:
     npm start
 
 
+![App Screenshot](img/4.jpg)
+
+![App Screenshot](img/5.jpg)
+
+![App Screenshot](img/6.jpg)
 
 ## Dependencies
 
@@ -50,3 +62,4 @@ To evaluate news articles, simply run:
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for detailS
+
