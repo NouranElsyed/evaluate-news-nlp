@@ -15,6 +15,23 @@ Notes:
 
     Node -v : v22.11.0
 
+# Folder Structure
+  
+    /starter_project
+        /dist
+        /src
+            /client
+                /js
+                /styles
+                /views
+                index.js
+            /server
+                index.js
+        webpack.prod.js
+        webpack.dev.js
+        package.json
+
+
 Follow these steps to run the application locally:
 
 1. Clone the repository:
