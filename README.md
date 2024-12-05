@@ -17,7 +17,7 @@ Notes:
 
 # Folder Structure
   
-    /starter_project
+
         /dist
         /src
             /client
